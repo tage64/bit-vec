@@ -9,7 +9,6 @@
 // except according to those terms.
 
 #![feature(test)]
-#![feature(hint_assert_unchecked)]
 
 extern crate bit_vec;
 extern crate rand;

@@ -16,6 +16,9 @@ borsh = { version = "1.5", default-features = false, features = ["derive"], opti
 serde = { version = "1.0", default-features = false, features = ["derive"], optional = true }
 miniserde = { version = "0.1", optional = true }
 nanoserde = { version = "0.1", optional = true }
+arrayvec = { version = "0.7.6", optional = true }
+smallvec = { version = "1.13.2", optional = true, features = ["const_generics", "const_new", "union"] }
+allocator-api2 = { version = "0.2.20", optional = true }
 
 [dev-dependencies]
 serde_json = "1.0"
@@ -24,10 +27,14 @@ rand_xorshift = "0.3"
 
 [features]
 default = ["std"]
+serde = ["dep:serde", "arrayvec?/serde", "smallvec?/serde", "allocator-api2?/serde"]
+borsh = ["dep:borsh", "arrayvec?/borsh"]
 serde_std = ["std", "serde/std"]
 serde_no_std = ["serde/alloc"]
 borsh_std = ["borsh/std"]
-std = []
+std = ["arrayvec?/std"]
+arrayvec = ["dep:arrayvec"]
+smallvec = ["dep:smallvec"]
 
 [package.metadata.docs.rs]
 features = ["borsh", "serde", "miniserde", "nanoserde"]
